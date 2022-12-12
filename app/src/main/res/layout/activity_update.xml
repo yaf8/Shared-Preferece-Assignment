@@ -60,31 +60,32 @@
         tools:ignore="Autofill,HardcodedText" />
 
     <EditText
-        android:id="@+id/edtUpdateFullName"
+        android:id="@+id/edtUpdateFirstName"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtUpdateID"
         android:layout_marginStart="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
-        android:layout_marginBottom="50dp"
-        android:hint="New Full Name"
+        android:hint="New First Name"
         android:inputType="text"
         android:textStyle="bold"
         tools:ignore="Autofill,HardcodedText" />
 
-
-    <TextView
-        android:id="@+id/textSearch"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/edtUpdateLastName"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edtUpdate"
-        android:layout_marginTop="300dp"
-        android:hint="Search Result"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:visibility="invisible"
-        tools:ignore="HardcodedText,SpUsage" />
+        android:layout_below="@+id/edtUpdateFirstName"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="50dp"
+        android:hint="New Last Name"
+        android:inputType="text"
+        android:textStyle="bold"
+        tools:ignore="Autofill,HardcodedText" />
+
 
     <Button
         android:id="@+id/btnBack"

@@ -24,7 +24,7 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText edtID, edtFullName;
+    private EditText edtID, edtFirstName, edtLastName;
 
     @SuppressLint("StaticFieldLeak")
     public static StudentAdapter adapter;
@@ -45,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         edtID = findViewById(R.id.edtID);
-        edtFullName = findViewById(R.id.edtFullName);
+        edtFirstName = findViewById(R.id.edtFirstName);
+        edtLastName = findViewById(R.id.edtLastName);
         Button btnSave = findViewById(R.id.btnSave);
         Button btnDelete = findViewById(R.id.btnDelete);
         Button btnUpdate = findViewById(R.id.btnUpdate);
@@ -70,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         greenToastMessage = greenToastLayout.findViewById(R.id.greenToastMessage);
 
         btnSave.setOnClickListener(v -> {
-            if (!(edtID.getText().toString().isEmpty()) && !(edtFullName.getText().toString()).isEmpty()) {
-                StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
+            if (!(edtID.getText().toString().isEmpty()) && !(edtFirstName.getText().toString()).isEmpty() && !(edtLastName.getText().toString()).isEmpty()) {
+                StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFirstName.getText().toString(), edtLastName.getText().toString()));
                 adapter.notifyItemInserted(StudentModalArrayList.size());
                 saveData();
             }
@@ -143,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
     {
         for (StudentModal str : MainActivity.StudentModalArrayList) {
             if (!(Objects.equals(str.getID(), (edtID.getText().toString())))) {
-
                 SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 gson = new Gson();
@@ -159,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                 toast.show();
 
                 edtID.setText("");
-                edtFullName.setText("");
+                edtFirstName.setText("");
                 break;
             } else {
                 blueToastMessage.setText("ID Exists!");

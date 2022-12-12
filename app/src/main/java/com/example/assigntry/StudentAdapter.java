@@ -31,7 +31,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     public void onBindViewHolder(@NonNull StudentAdapter.ViewHolder holder, int position) {
         StudentModal modal = StudentModalArrayList.get(position);
         holder.StudentID.setText(modal.getID());
-        holder.StudentFullName.setText(modal.getFullName());
+        holder.StudentName.setText(modal.getFullName());
     }
 
     @Override
@@ -42,13 +42,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView StudentID;
-        private final TextView StudentFullName;
+        private final TextView StudentName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             StudentID = itemView.findViewById(R.id.textID);
-            StudentFullName = itemView.findViewById(R.id.textName);
+            StudentName = itemView.findViewById(R.id.textName);
         }
     }
 }

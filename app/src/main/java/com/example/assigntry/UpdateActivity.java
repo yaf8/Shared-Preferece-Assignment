@@ -22,7 +22,7 @@ import java.util.Objects;
 public class UpdateActivity extends AppCompatActivity {
 
     private Button btnUpdate;
-    private EditText edtUpdate, edtUpdateID, edtUpdateFullName;
+    private EditText edtUpdate, edtUpdateID, edtUpdateFirstName, edtUpdateLastName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +34,12 @@ public class UpdateActivity extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
         edtUpdate = findViewById(R.id.edtUpdate);
         edtUpdateID = findViewById(R.id.edtUpdateID);
-        edtUpdateFullName = findViewById(R.id.edtUpdateFullName);
+        edtUpdateFirstName = findViewById(R.id.edtUpdateFirstName);
+        edtUpdateLastName = findViewById(R.id.edtUpdateLastName);
 
         edtUpdateID.setVisibility(View.INVISIBLE);
-        edtUpdateFullName.setVisibility(View.INVISIBLE);
+        edtUpdateFirstName.setVisibility(View.INVISIBLE);
+        edtUpdateLastName.setVisibility(View.INVISIBLE);
         btnUpdate.setVisibility(View.INVISIBLE);
 
         btnFind.setOnClickListener(v -> {
@@ -58,13 +60,14 @@ public class UpdateActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void find() {
 
-        String searchID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
+        String searchID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFirstName = edtUpdateFirstName.getText().toString(), newLastName = edtUpdateLastName.getText().toString();
         for (StudentModal str : MainActivity.StudentModalArrayList)
         {
             if(Objects.equals(str.getID(), searchID))
             {
                 edtUpdateID.setVisibility(View.VISIBLE);
-                edtUpdateFullName.setVisibility(View.VISIBLE);
+                edtUpdateFirstName.setVisibility(View.VISIBLE);
+                edtUpdateLastName.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
 
                 MainActivity.greenToastMessage.setText("ID Found!");
@@ -77,7 +80,8 @@ public class UpdateActivity extends AppCompatActivity {
             }
             else{
                 edtUpdateID.setVisibility(View.INVISIBLE);
-                edtUpdateFullName.setVisibility(View.INVISIBLE);
+                edtUpdateFirstName.setVisibility(View.INVISIBLE);
+                edtUpdateLastName.setVisibility(View.INVISIBLE);
                 btnUpdate.setVisibility(View.INVISIBLE);
 
                 MainActivity.blueToastMessage.setText("Id Not Found!");
@@ -92,14 +96,15 @@ public class UpdateActivity extends AppCompatActivity {
 
     @SuppressLint("SetTextI18n")
     private void update() {
-        String findID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
+        String findID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFirstName = edtUpdateFirstName.getText().toString(), newLastName = edtUpdateLastName.getText().toString();
 
         for(int i = 0; i < MainActivity.StudentModalArrayList.size(); i++)
         {
             if(Objects.equals(MainActivity.StudentModalArrayList.get(i).getID(), findID))
             {
                 MainActivity.StudentModalArrayList.get(i).setID(newID);
-                MainActivity.StudentModalArrayList.get(i).setFullName(newFullName);
+                MainActivity.StudentModalArrayList.get(i).setFirstName(newFirstName);
+                MainActivity.StudentModalArrayList.get(i).setLastName(newLastName);
 
                 save();
 

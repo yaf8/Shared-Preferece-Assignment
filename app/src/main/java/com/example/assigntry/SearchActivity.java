@@ -48,7 +48,7 @@ public class SearchActivity extends AppCompatActivity {
         for (StudentModal str : MainActivity.StudentModalArrayList) {
             if(Objects.equals(str.getID(), searchTxt))
             {
-                textSearch.setText("ID :      " + str.getID() + "\n" + "Name :    " + str.getFullName() + "\n");
+                textSearch.setText("ID :      " + str.getID() + "\n" + "Name :    " + str.getFullName() + "\n\n");
 
                 MainActivity.greenToastMessage.setText("Id Found!");
                 Toast toast = new Toast(getApplicationContext());

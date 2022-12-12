@@ -1,27 +1,41 @@
 package com.example.assigntry;
 
 public class StudentModal {
-    private String ID, FullName;
+    private String ID, FirstName, LastName;
 
-    public StudentModal(String ID, String FullName) {
+    public StudentModal(String ID, String firstName, String lastName) {
         this.ID = ID;
-        this.FullName = FullName;
+        this.FirstName = firstName;
+        this.LastName = lastName;
     }
 
     public String getID() {
         return ID;
     }
 
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
     public void setID(String ID) {
         this.ID = ID;
     }
 
-    public void setFullName(String FullName)
+    public void setFirstName(String firstName)
     {
-        this.FullName = FullName;
+        this.FirstName = firstName;
     }
-    public String getFullName()
+
+    public String getFirstName()
     {
-        return FullName;
+        return FirstName;
+    }
+
+    public String getFullName(){
+        return (this.FirstName + " " + this.LastName);
     }
 }
