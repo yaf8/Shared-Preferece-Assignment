@@ -20,7 +20,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:text="back" />
-
+        android:text="back"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>

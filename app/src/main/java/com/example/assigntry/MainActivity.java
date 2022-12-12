@@ -14,8 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +25,6 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     private EditText edtID, edtFullName;
-    private Button btnSave, btnUpdate, btnDelete, btnSearch, btnDeleteAll, btnDisplay;
 
     @SuppressLint("StaticFieldLeak")
     public static StudentAdapter adapter;
@@ -36,9 +33,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String STUD_PREF_NAME = "Stud_Prefs";
     public static final String STUD_PREF_KEY = "stud_key";
     public static LayoutInflater liBlue, liRed, liGreen;
+    @SuppressLint("StaticFieldLeak")
     public static View blueToastLayout, redToastLayout, greenToastLayout;
+    @SuppressLint("StaticFieldLeak")
     public static TextView blueToastMessage, redToastMessage, greenToastMessage;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
 
         edtID = findViewById(R.id.edtID);
         edtFullName = findViewById(R.id.edtFullName);
-        btnSave = findViewById(R.id.btnSave);
-        btnDelete = findViewById(R.id.btnDelete);
-        btnUpdate = findViewById(R.id.btnUpdate);
-        btnSearch = findViewById(R.id.btnSearch);
-        btnDeleteAll = findViewById(R.id.btnDeleteAll);
-        btnDisplay = findViewById(R.id.btnDisplay);
+        Button btnSave = findViewById(R.id.btnSave);
+        Button btnDelete = findViewById(R.id.btnDelete);
+        Button btnUpdate = findViewById(R.id.btnUpdate);
+        Button btnSearch = findViewById(R.id.btnSearch);
+        Button btnDeleteAll = findViewById(R.id.btnDeleteAll);
+        Button btnDisplay = findViewById(R.id.btnDisplay);
 
 
         loadData();
@@ -74,8 +74,14 @@ public class MainActivity extends AppCompatActivity {
                 StudentModalArrayList.add(new StudentModal(edtID.getText().toString(), edtFullName.getText().toString()));
                 adapter.notifyItemInserted(StudentModalArrayList.size());
                 saveData();
-
-
+            }
+            else{
+                blueToastMessage.setText("Id or Name is EMPTY!");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(blueToastLayout);
+                toast.show();
             }
         });
 
@@ -84,9 +90,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        btnDeleteAll.setOnClickListener(v -> {
-            deleteAll();
-        });
+        btnDeleteAll.setOnClickListener(v -> deleteAll());
 
         btnUpdate.setOnClickListener(v -> {
             Intent intent1 = new Intent(this, UpdateActivity.class);
@@ -102,19 +106,16 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent3);
         });
     }
+
+    @SuppressLint("SetTextI18n")
     private void deleteAll() {
         StudentModalArrayList.clear();
 
         SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
-
         SharedPreferences.Editor editor = sharedPreferences.edit();
-
         gson = new Gson();
-
         String json = gson.toJson(StudentModalArrayList);
-
         editor.putString(MainActivity.STUD_PREF_KEY, json);
-
         editor.apply();
 
         redToastMessage.setText("Data Cleared");
@@ -125,16 +126,11 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
-
     private void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
-
         Gson gson = new Gson();
-
         String json = sharedPreferences.getString(STUD_PREF_KEY, null);
-
         Type type = new TypeToken<ArrayList<StudentModal>>() {}.getType();
-
         StudentModalArrayList = gson.fromJson(json, type);
 
         if (StudentModalArrayList == null) {
@@ -142,39 +138,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void saveData() {
-        for (StudentModal str : MainActivity.StudentModalArrayList)
-        {
-            if(!(Objects.equals(str.getID(), (edtID.getText().toString()))))
-            {
+    @SuppressLint("SetTextI18n")
+    private void saveData()
+    {
+        for (StudentModal str : MainActivity.StudentModalArrayList) {
+            if (!(Objects.equals(str.getID(), (edtID.getText().toString())))) {
+
                 SharedPreferences sharedPreferences = getSharedPreferences(STUD_PREF_NAME, MODE_PRIVATE);
-
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-
                 gson = new Gson();
-
                 String json = gson.toJson(StudentModalArrayList);
-
                 editor.putString(STUD_PREF_KEY, json);
-
                 editor.apply();
-
 
                 greenToastMessage.setText("Saved Successfully");
                 Toast toast = new Toast(getApplicationContext());
                 toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 150);
                 toast.setView(greenToastLayout);
                 toast.show();
 
                 edtID.setText("");
                 edtFullName.setText("");
-            }
-            else {
+                break;
+            } else {
                 blueToastMessage.setText("ID Exists!");
                 Toast toast = new Toast(getApplicationContext());
                 toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.TOP, 0, 150);
                 toast.setView(blueToastLayout);
                 toast.show();
             }

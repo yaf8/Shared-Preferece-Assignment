@@ -10,7 +10,6 @@ import android.widget.Button;
 
 public class DisplayActivity extends AppCompatActivity {
 
-    private Button btnBack;
     private RecyclerView studentRV;
 
     @Override
@@ -18,7 +17,7 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        btnBack = findViewById(R.id.btnBack);
+        Button btnBack = findViewById(R.id.btnBack);
         studentRV = findViewById(R.id.studentRV);
 
         buildRecyclerView();
@@ -34,10 +33,9 @@ public class DisplayActivity extends AppCompatActivity {
         MainActivity.adapter = new StudentAdapter(MainActivity.StudentModalArrayList, this);
 
         LinearLayoutManager manager = new LinearLayoutManager(this);
+
         studentRV.setHasFixedSize(true);
-
         studentRV.setLayoutManager(manager);
-
         studentRV.setAdapter(MainActivity.adapter);
     }
 }

@@ -2,9 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/blue_toast_layout"
     android:orientation="vertical"
-    android:background="#0022FA">
+    android:background="#0022FA"
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/blueToastMessage"
@@ -13,6 +15,7 @@
         android:layout_height="45sp"
         android:textColor="@color/white"
         android:textSize="17sp"
-        android:text="Blue Toast"/>
+        android:text="Blue Toast"
+        tools:ignore="HardcodedText" />
 
 </LinearLayout>

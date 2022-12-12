@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    private Button btnUpdate, btnBack, btnFind;
+    private Button btnUpdate;
     private EditText edtUpdate, edtUpdateID, edtUpdateFullName;
 
     @Override
@@ -28,8 +29,8 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        btnFind = findViewById(R.id.btnFind);
-        btnBack = findViewById(R.id.btnBack);
+        Button btnFind = findViewById(R.id.btnFind);
+        Button btnBack = findViewById(R.id.btnBack);
         btnUpdate = findViewById(R.id.btnUpdate);
         edtUpdate = findViewById(R.id.edtUpdate);
         edtUpdateID = findViewById(R.id.edtUpdateID);
@@ -38,7 +39,6 @@ public class UpdateActivity extends AppCompatActivity {
         edtUpdateID.setVisibility(View.INVISIBLE);
         edtUpdateFullName.setVisibility(View.INVISIBLE);
         btnUpdate.setVisibility(View.INVISIBLE);
-
 
         btnFind.setOnClickListener(v -> {
             find();
@@ -55,6 +55,7 @@ public class UpdateActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void find() {
 
         String searchID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
@@ -65,11 +66,31 @@ public class UpdateActivity extends AppCompatActivity {
                 edtUpdateID.setVisibility(View.VISIBLE);
                 edtUpdateFullName.setVisibility(View.VISIBLE);
                 btnUpdate.setVisibility(View.VISIBLE);
-                Toast.makeText(this, "Found", Toast.LENGTH_SHORT).show();
+
+                MainActivity.greenToastMessage.setText("ID Found!");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.greenToastLayout);
+                toast.show();
+                break;
+            }
+            else{
+                edtUpdateID.setVisibility(View.INVISIBLE);
+                edtUpdateFullName.setVisibility(View.INVISIBLE);
+                btnUpdate.setVisibility(View.INVISIBLE);
+
+                MainActivity.blueToastMessage.setText("Id Not Found!");
+                Toast toast = new Toast(getApplicationContext());
+                toast.setDuration(Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
+                toast.setView(MainActivity.blueToastLayout);
+                toast.show();
             }
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void update() {
         String findID = edtUpdate.getText().toString(), newID = edtUpdateID.getText().toString(), newFullName = edtUpdateFullName.getText().toString();
 
@@ -80,29 +101,29 @@ public class UpdateActivity extends AppCompatActivity {
                 MainActivity.StudentModalArrayList.get(i).setID(newID);
                 MainActivity.StudentModalArrayList.get(i).setFullName(newFullName);
 
-                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
+                save();
 
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                MainActivity.gson = new Gson();
-
-                String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
-
-                editor.putString(MainActivity.STUD_PREF_KEY, json);
-
-                editor.apply();
-
-
-                MainActivity.blueToastMessage.setText("Updated Successfully");
+                MainActivity.greenToastMessage.setText("Updated Successfully");
                 Toast toast = new Toast(getApplicationContext());
                 toast.setDuration(Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
-                toast.setView(MainActivity.blueToastLayout);
+                toast.setView(MainActivity.greenToastLayout);
                 toast.show();
 
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
+                break;
             }
         }
+    }
+
+    public void save()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        MainActivity.gson = new Gson();
+        String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
+        editor.putString(MainActivity.STUD_PREF_KEY, json);
+        editor.apply();
     }
 }

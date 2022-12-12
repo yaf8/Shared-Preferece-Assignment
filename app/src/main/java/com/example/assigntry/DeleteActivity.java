@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -20,7 +21,7 @@ import java.util.Objects;
 
 public class DeleteActivity extends AppCompatActivity {
 
-    private Button btnDelete, btnBack, btnFind;
+    private Button btnDelete;
     private EditText edtFind;
 
     @Override
@@ -28,8 +29,8 @@ public class DeleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete);
 
-        btnFind = findViewById(R.id.btnFind);
-        btnBack = findViewById(R.id.btnBack);
+        Button btnFind = findViewById(R.id.btnFind);
+        Button btnBack = findViewById(R.id.btnBack);
         btnDelete = findViewById(R.id.btnDelete);
         edtFind = findViewById(R.id.edtFind);
 
@@ -50,6 +51,7 @@ public class DeleteActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void find() {
 
         String findID = edtFind.getText().toString();
@@ -65,6 +67,7 @@ public class DeleteActivity extends AppCompatActivity {
                 toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
                 toast.setView(MainActivity.greenToastLayout);
                 toast.show();
+                break;
             }
             else{
                 MainActivity.blueToastMessage.setText("ID Not Found");
@@ -77,6 +80,7 @@ public class DeleteActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private void delete() {
         String findID = edtFind.getText().toString();
 
@@ -86,17 +90,7 @@ public class DeleteActivity extends AppCompatActivity {
             {
                 MainActivity.StudentModalArrayList.remove(i);
 
-                SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
-
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-
-                MainActivity.gson = new Gson();
-
-                String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
-
-                editor.putString(MainActivity.STUD_PREF_KEY, json);
-
-                editor.apply();
+                save();
 
                 MainActivity.redToastMessage.setText("Deleted Successfully");
                 Toast toast = new Toast(getApplicationContext());
@@ -104,8 +98,17 @@ public class DeleteActivity extends AppCompatActivity {
                 toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.TOP, 0, 150);
                 toast.setView(MainActivity.redToastLayout);
                 toast.show();
-
             }
         }
+    }
+
+    public void save()
+    {
+        SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.STUD_PREF_NAME, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        MainActivity.gson = new Gson();
+        String json = MainActivity.gson.toJson(MainActivity.StudentModalArrayList);
+        editor.putString(MainActivity.STUD_PREF_KEY, json);
+        editor.apply();
     }
 }

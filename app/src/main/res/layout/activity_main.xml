@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UselessParent"
     android:background="@mipmap/white_layout_background"
     tools:context=".MainActivity">
 
     <RelativeLayout
-        android:id="@+id/RelativeLayout"
+        android:id="@+id/RelativeLayoutTitle"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="#4529C1"
@@ -22,7 +23,8 @@
             android:textAllCaps="true"
             android:textColor="#BEA8F3"
             android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="HardcodedText" />
 
     </RelativeLayout>
 
@@ -31,10 +33,16 @@
         android:id="@+id/LinearLayoutEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
+        android:layout_below="@id/RelativeLayoutTitle"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="20dp"
         android:background="#9F9E9E"
-        android:layout_marginTop="180dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingStart="15dp"
+        android:paddingTop="20dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="20dp">
 
         <EditText
             android:id="@+id/edtID"
@@ -43,7 +51,8 @@
             android:backgroundTint="#FAE5A7"
             android:hint="ID"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="Autofill,HardcodedText,TextFields" />
 
         <EditText
             android:id="@+id/edtFullName"
@@ -53,7 +62,8 @@
             android:backgroundTint="#FAE5A7"
             android:hint="Full Name"
             android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            tools:ignore="Autofill,HardcodedText,TextFields" />
 
     </LinearLayout>
 
@@ -71,14 +81,16 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:backgroundTint="#39802C"
-            android:text="Save" />
+            android:text="Save"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnDisplay"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="35dp"
-            android:text="Display" />
+            android:text="Display"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnUpdate"
@@ -86,7 +98,8 @@
             android:layout_height="60dp"
             android:backgroundTint="#3948A8"
             android:layout_marginTop="35dp"
-            android:text="Update" />
+            android:text="Update"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/btnDelete"
@@ -94,7 +107,8 @@
             android:layout_height="60dp"
             android:backgroundTint="#9E3535"
             android:layout_marginTop="35dp"
-            android:text="Delete" />
+            android:text="Delete"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,7 +126,8 @@
             android:textColor="@color/black"
             android:backgroundTint="#FFC107"
             android:layout_height="60dp"
-            android:text="Search" />
+            android:text="Search"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
             android:id="@+id/btnDeleteAll"
@@ -120,7 +135,8 @@
             android:layout_height="60dp"
             android:backgroundTint="#DD1A1A"
             android:layout_marginStart="40dp"
-            android:text="Delete All" />
+            android:text="Delete All"
+            tools:ignore="ButtonStyle,HardcodedText" />
 
     </LinearLayout>
 

@@ -14,12 +14,10 @@ import java.util.ArrayList;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHolder> {
 
-    private ArrayList<StudentModal> StudentModalArrayList;
-    private Context context;
+    private final ArrayList<StudentModal> StudentModalArrayList;
 
     public StudentAdapter(ArrayList<StudentModal> StudentModalArrayList, Context context) {
         this.StudentModalArrayList = StudentModalArrayList;
-        this.context = context;
     }
 
     @NonNull
@@ -41,9 +39,10 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.ViewHold
         return StudentModalArrayList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView StudentID, StudentFullName;
+        private final TextView StudentID;
+        private final TextView StudentFullName;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
