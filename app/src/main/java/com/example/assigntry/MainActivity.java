@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
                 edtID.setText("");
                 edtFirstName.setText("");
+                edtLastName.setText("");
                 break;
             } else {
                 blueToastMessage.setText("ID Exists!");
