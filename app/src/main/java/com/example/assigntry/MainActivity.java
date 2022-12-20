@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         btnDisplay.setOnClickListener(v -> {
             Intent intent = new Intent(this, DisplayActivity.class);
             startActivity(intent);
+            finish();
         });
 
         btnDeleteAll.setOnClickListener(v -> deleteAll());
@@ -96,15 +97,18 @@ public class MainActivity extends AppCompatActivity {
         btnUpdate.setOnClickListener(v -> {
             Intent intent1 = new Intent(this, UpdateActivity.class);
             startActivity(intent1);
+            finish();
         });
 
         btnSearch.setOnClickListener(v -> {
             Intent intent2 = new Intent(this, SearchActivity.class);
             startActivity(intent2);
+            finish();
         });
         btnDelete.setOnClickListener(v -> {
             Intent intent3 = new Intent(this, DeleteActivity.class);
             startActivity(intent3);
+            finish();
         });
     }
 

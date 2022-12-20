@@ -37,6 +37,7 @@ public class SearchActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         });
 
     }
